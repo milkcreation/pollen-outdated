@@ -1,5 +1,5 @@
 // Variables
-@import "variables";
+@import "./variables";
 
 // Personnalisation
 * html #outdated {
@@ -19,19 +19,19 @@
   background-color: $outdated-background-color;
   color: $outdated-color;
 
-  .OutdatedBrowser-title {
+  .Outdated-title {
     font-size: 25px;
     line-height: 25px;
     margin: 30px 0 10px;
   }
 
-  .OutdatedBrowser-text {
+  .Outdated-text {
     font-size: 12px;
     line-height: 12px;
     margin: 0;
   }
 
-  .OutdatedBrowser-upload {
+  .Outdated-upload {
     display: block;
     position: relative;
     padding: 10px 20px;
@@ -49,7 +49,7 @@
     }
   }
 
-  .OutdatedBrowser-close {
+  .Outdated-close {
     position: absolute;
     top: 10px;
     right: 25px;

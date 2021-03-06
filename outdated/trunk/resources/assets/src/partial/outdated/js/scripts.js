@@ -1,7 +1,7 @@
 'use strict'
 
-let outdatedBrowser = function (test, element) {
-  let self = outdatedBrowser,
+let Outdated = function (test, element) {
+  let self = Outdated,
       el = element || document.getElementById('outdated'),
       close = document.getElementById('outdated--close')
 
@@ -102,4 +102,4 @@ let outdatedBrowser = function (test, element) {
   }
 }
 
-export default outdatedBrowser
+export default Outdated

@@ -1,9 +1,9 @@
 <?php
 /**
- * @var tiFy\Contracts\Partial\PartialView
+ * @var Pollen\Partial\PartialViewLoaderInterface $this
  */
 ?>
-<div id="outdated" class="tiFyOutdatedBrowser">
+<div id="outdated" class="Outdated">
     <div class="OutdatedBrowser-title"><?php _e('La version de votre navigateur est obsolète.', 'tify'); ?></div>
 
     <p class="OutdatedBrowser-text">
