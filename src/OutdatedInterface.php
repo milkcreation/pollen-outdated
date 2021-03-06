@@ -16,13 +16,6 @@ interface OutdatedInterface extends
     PartialProxyInterface
 {
     /**
-     * Résolution de sortie le classe sous forme de chaîne de caractères.
-     *
-     * @return string
-     */
-    public function __toString(): string;
-
-    /**
      * Chargement.
      *
      * @return static
@@ -35,6 +28,27 @@ interface OutdatedInterface extends
      * @return OutdatedAdapterInterface|null
      */
     public function getAdapter(): ?OutdatedAdapterInterface;
+
+    /**
+     * Récupération du rendu HTML.
+     *
+     * @return string
+     */
+    public function getHtmlRender(): string;
+
+    /**
+     * Récupération des styles CSS.
+     *
+     * @return string
+     */
+    public function getStyles(): string;
+
+    /**
+     * Récupération des scripts JS.
+     *
+     * @return string
+     */
+    public function getScripts(): string;
 
     /**
      * Chemin absolu vers une ressource (fichier|répertoire).

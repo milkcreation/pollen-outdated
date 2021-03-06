@@ -1,0 +1,62 @@
+* html #outdated {
+    position: absolute;
+}
+
+#outdated {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 170px;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 9999999;
+    background-color: #F25648;
+    color: #FFFFFF;
+}
+#outdated .Outdated-title {
+    font-size: 25px;
+    line-height: 25px;
+    margin: 30px 0 10px;
+}
+#outdated .Outdated-text {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+}
+#outdated .Outdated-upload {
+    display: block;
+    position: relative;
+    padding: 10px 20px;
+    margin: 30px auto 0;
+    width: 230px;
+    /*need for IE*/
+    color: #FFFFFF;
+    text-decoration: none;
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+#outdated .Outdated-upload:hover {
+    color: #F25648;
+    background-color: #FFFFFF;
+}
+#outdated .Outdated-close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    padding: 0 13px;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 36px;
+    line-height: 0.8;
+    vertical-align: top;
+    border: none;
+}
+#outdated .Outdated-close, #outdated .Outdated-close:active, #outdated .Outdated-close:focus, #outdated .Outdated-close:hover, #outdated .Outdated-close:visited {
+    color: #FFFFFF;
+}
+#outdated .Outdated-close:hover {
+    transform: scale(1.2);
+}
