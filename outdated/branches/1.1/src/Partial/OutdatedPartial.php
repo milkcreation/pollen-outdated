@@ -6,6 +6,7 @@ namespace Pollen\Outdated\Partial;
 
 use Pollen\Outdated\OutdatedInterface;
 use Pollen\Outdated\OutdatedProxy;
+use Pollen\Partial\PartialDriverInterface;
 use Pollen\Partial\PartialManagerInterface;
 use Pollen\Partial\PartialDriver;
 
@@ -32,9 +33,7 @@ class OutdatedPartial extends PartialDriver
         return array_merge(
             parent::defaultParams(),
             [
-                'bgColor'   => '#F25648',
-                'color'     => '#FFF',
-                'lowerThan' => 'borderImage',
+                'lowerThan' => 'Edge',
             ]
         );
     }
@@ -42,8 +41,19 @@ class OutdatedPartial extends PartialDriver
     /**
      * @inheritDoc
      */
+    public function parseAttrId(): PartialDriverInterface
+    {
+        if (!$this->has('attrs.id')) {
+            $this->set('attrs.id', 'outdated');
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function viewDirectory(): string
     {
-        return $this->outdated()->resources('views/partial/outdated');
+        return $this->outdated()->resources('/views/partial/outdated');
     }
 }

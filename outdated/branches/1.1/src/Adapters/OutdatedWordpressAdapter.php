@@ -18,11 +18,17 @@ class OutdatedWordpressAdapter extends AbstractOutdatedAdapter
 
         if ($this->outdated()->config('wordpress.autoload', true) === true) {
             add_action(
+                'wp_head',
+                function () {
+                    echo $this->outdated()->getStyles();
+                }
+            );
+            add_action(
                 'wp_footer',
                 function () {
-                    echo $this->outdated();
-                },
-                999999
+                    echo $this->outdated()->getHtmlRender();
+                    echo $this->outdated()->getScripts();
+                }
             );
         }
     }

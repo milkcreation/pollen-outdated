@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pollen\Outdated;
 
+use Pollen\Outdated\Adapters\OutdatedWordpressAdapter;
 use Pollen\Outdated\Partial\OutdatedPartial;
 use Pollen\Support\Concerns\BootableTrait;
 use Pollen\Support\Concerns\ConfigBagAwareTrait;
@@ -83,24 +84,17 @@ class Outdated implements OutdatedInterface
     /**
      * @inheritDoc
      */
-    public function __toString(): string
-    {
-        return $this->partial()->get(
-            'outdated',
-            ['lowerThan' => $this->config('lowerThan', 'borderImage')]
-        )->render();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function boot(): OutdatedInterface
     {
         if (!$this->isBooted()) {
+            if ($this->adapter === null && defined('WPINC')) {
+                $this->setAdapter(new OutdatedWordpressAdapter($this));
+            }
+
             $this->partial()->register(
                 'outdated',
                 $this->containerHas(OutdatedPartial::class)
-                    ? $this->containerGet(OutdatedPartial::class)
+                    ? OutdatedPartial::class
                     : new OutdatedPartial($this, $this->partial())
             );
 
@@ -115,6 +109,46 @@ class Outdated implements OutdatedInterface
     public function getAdapter(): ?OutdatedAdapterInterface
     {
         return $this->adapter;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHtmlRender(): string
+    {
+        return $this->partial()->get('outdated')->render();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStyles(): string
+    {
+        $concatCss = '';
+
+        if (file_exists($this->resources('/assets/dist/partial/outdated.min.css'))) {
+            $concatCss .= file_get_contents($this->resources('/assets/dist/partial/outdated.min.css'));
+        }
+
+        return "<style type=\"text/css\">{$concatCss}</style>";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getScripts(): string
+    {
+        $concatJs = '';
+
+        if (file_exists($this->resources('/assets/dist/partial/outdated.min.js'))) {
+            $concatJs .= file_get_contents($this->resources('/assets/dist/partial/outdated.min.js'));
+        }
+
+        $lowerThan = $this->config('lowerThan', 'Edge');
+
+        $concatJs .= "window.addEventListener('DOMContentLoaded', () => {Outdated('{$lowerThan}')})";
+
+        return "<script type=\"text/javascript\">/* <![CDATA[ */{$concatJs}/* ]]> */</script>";
     }
 
     /**
