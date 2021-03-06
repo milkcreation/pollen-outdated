@@ -16,9 +16,10 @@ return [
 
     /**
      * Configuration de Wordpress
-     */
+     * /
     'wordpress' => [
         // Chargement automatique
         'autoload' => true,
     ]
+    /**/
 ];
