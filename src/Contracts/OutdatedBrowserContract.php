@@ -9,6 +9,7 @@ use tiFy\Contracts\Support\ParamsBag;
 /**
  * @mixin \tiFy\Support\Concerns\BootableTrait
  * @mixin \tiFy\Support\Concerns\ContainerAwareTrait
+ * @mixin \tiFy\Support\Concerns\PartialManagerAwareTrait
  */
 interface OutdatedBrowserContract
 {

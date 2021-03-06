@@ -2,18 +2,16 @@
 
 namespace Pollen\OutdatedBrowser;
 
-use tiFy\Contracts\Partial\Partial as PartialManagerContract;
 use Pollen\OutdatedBrowser\Adapters\WordpressAdapter;
 use Pollen\OutdatedBrowser\Contracts\OutdatedBrowserContract;
 use Pollen\OutdatedBrowser\Partial\OutdatedBrowserPartial;
 use tiFy\Container\ServiceProvider;
+use tiFy\Partial\Contracts\PartialContract;
 
 class OutdatedBrowserServiceProvider extends ServiceProvider
 {
     /**
-     * Liste des noms de qualification des services fournis.
-     * @internal requis. Tous les noms de qualification de services à traiter doivent être renseignés.
-     * @var string[]
+     * @inheritDoc
      */
     protected $provides = [
         OutdatedBrowserContract::class,
@@ -27,10 +25,10 @@ class OutdatedBrowserServiceProvider extends ServiceProvider
     public function boot(): void
     {
         events()->listen('wp.booted', function () {
-            /** @var OutdatedBrowserContract $obrowser */
-            $obrowser = $this->getContainer()->get(OutdatedBrowserContract::class);
+            /** @var OutdatedBrowserContract $outdatedBrowser */
+            $outdatedBrowser = $this->getContainer()->get(OutdatedBrowserContract::class);
 
-            $obrowser->setAdapter($this->getContainer()->get(WordpressAdapter::class))->boot();
+            $outdatedBrowser->setAdapter($this->getContainer()->get(WordpressAdapter::class))->boot();
         });
     }
 
@@ -44,7 +42,7 @@ class OutdatedBrowserServiceProvider extends ServiceProvider
         });
 
         $this->registerAdapters();
-        $this->registerPartials();
+        $this->registerPartialDrivers();
     }
 
     /**
@@ -64,12 +62,12 @@ class OutdatedBrowserServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerPartials(): void
+    public function registerPartialDrivers(): void
     {
         $this->getContainer()->add(OutdatedBrowserPartial::class, function () {
             return new OutdatedBrowserPartial(
                 $this->getContainer()->get(OutdatedBrowserContract::class),
-                $this->getContainer()->get(PartialManagerContract::class)
+                $this->getContainer()->get(PartialContract::class)
             );
         });
     }

@@ -2,10 +2,10 @@
 
 namespace Pollen\OutdatedBrowser\Partial;
 
-use tiFy\Contracts\Partial\Partial as PartialManager;
-use tiFy\Partial\PartialDriver;
 use Pollen\OutdatedBrowser\Contracts\OutdatedBrowserContract;
 use Pollen\OutdatedBrowser\OutdatedBrowserAwareTrait;
+use tiFy\Partial\Contracts\PartialContract;
+use tiFy\Partial\PartialDriver;
 
 class OutdatedBrowserPartial extends PartialDriver
 {
@@ -13,9 +13,9 @@ class OutdatedBrowserPartial extends PartialDriver
 
     /**
      * @param OutdatedBrowserContract $outdatedBrowser
-     * @param PartialManager $partialManager
+     * @param PartialContract $partialManager
      */
-    public function __construct(OutdatedBrowserContract $outdatedBrowser, PartialManager $partialManager)
+    public function __construct(OutdatedBrowserContract $outdatedBrowser, PartialContract $partialManager)
     {
         $this->setOutdatedBrowser($outdatedBrowser);
 

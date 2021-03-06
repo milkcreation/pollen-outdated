@@ -1,6 +1,6 @@
 <?php
 /**
- * @var tiFy\Contracts\Partial\PartialView
+ * @var tiFy\Partial\PartialViewInterface $this
  */
 ?>
 <div id="outdated" class="tiFyOutdatedBrowser">
