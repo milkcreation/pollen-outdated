@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pollen\Outdated;
 
-use Pollen\Outdated\Adapters\OutdatedWordpressAdapter;
+use Pollen\Outdated\Adapters\WpOutdatedAdapter;
 use Pollen\Outdated\Partial\OutdatedPartial;
 use Pollen\Support\Concerns\BootableTrait;
 use Pollen\Support\Concerns\ConfigBagAwareTrait;
@@ -88,7 +88,7 @@ class Outdated implements OutdatedInterface
     {
         if (!$this->isBooted()) {
             if ($this->adapter === null && defined('WPINC')) {
-                $this->setAdapter(new OutdatedWordpressAdapter($this));
+                $this->setAdapter(new WpOutdatedAdapter($this));
             }
 
             $this->partial()->register(
