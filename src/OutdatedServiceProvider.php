@@ -6,7 +6,7 @@ namespace Pollen\Outdated;
 
 use Pollen\Container\BaseServiceProvider;
 use Pollen\Partial\PartialManagerInterface;
-use Pollen\Outdated\Adapters\OutdatedWordpressAdapter;
+use Pollen\Outdated\Adapters\WpOutdatedAdapter;
 use Pollen\Outdated\Partial\OutdatedPartial;
 
 
@@ -18,7 +18,7 @@ class OutdatedServiceProvider extends BaseServiceProvider
     protected $provides = [
         OutdatedInterface::class,
         OutdatedPartial::class,
-        OutdatedWordpressAdapter::class,
+        WpOutdatedAdapter::class,
     ];
 
     /**
@@ -45,9 +45,9 @@ class OutdatedServiceProvider extends BaseServiceProvider
     public function registerAdapters(): void
     {
         $this->getContainer()->share(
-            OutdatedWordpressAdapter::class,
+            WpOutdatedAdapter::class,
             function () {
-                return new OutdatedWordpressAdapter($this->getContainer()->get(OutdatedInterface::class));
+                return new WpOutdatedAdapter($this->getContainer()->get(OutdatedInterface::class));
             }
         );
     }

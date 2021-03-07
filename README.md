@@ -70,10 +70,8 @@ var_dump($outdated->getScripts());
 ## Standalone Wordpress Usage
 ```php
 use Pollen\Outdated\Outdated;
-use Pollen\Outdated\Adapters\OutdatedWordpressAdapter;
 
 $outdated = new Outdated(['lowerThan' => 'test']);
-$outdated->setAdapter(new OutdatedWordpressAdapter($outdated));
 // >> And ... that's it
 ```
 
