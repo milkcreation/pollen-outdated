@@ -44,12 +44,10 @@ trait OutdatedProxy
      *
      * @param OutdatedInterface $outdated
      *
-     * @return static
+     * @return void
      */
-    public function setOutdated(OutdatedInterface $outdated): self
+    public function setOutdated(OutdatedInterface $outdated): void
     {
         $this->outdated = $outdated;
-
-        return $this;
     }
 }
