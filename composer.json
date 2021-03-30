@@ -12,7 +12,7 @@
     "deprecated"
   ],
   "type": "presstify-plugin",
-  "time": "2021-03-10",
+  "time": "2021-03-30",
   "license": "MIT",
   "authors": [
     {
@@ -48,7 +48,7 @@
     }
   },
   "suggest": {
-    "pollen-solutions/container" : "Pollen Container Component - PSR-11 ready Dependencies Injection Container"
+    "pollen-solutions/container" : "Pollen Container Component - PSR-11 ready Dependencies Injection Container."
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
