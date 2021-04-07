@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pollen\Outdated;
 
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 trait OutdatedProxy
@@ -23,16 +23,14 @@ trait OutdatedProxy
     public function outdated(): OutdatedInterface
     {
         if ($this->outdated === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(OutdatedInterface::class)) {
-                $this->outdated = $container->get(OutdatedInterface::class);
-            } else {
-                try {
-                    $this->outdated = Outdated::getInstance();
-                } catch (RuntimeException $e) {
-                    $this->outdated = new Outdated();
-                }
+            try {
+                $this->outdated = Outdated::getInstance();
+            } catch (RuntimeException $e) {
+                $this->outdated = StaticProxy::getProxyInstance(
+                    OutdatedInterface::class,
+                    Outdated::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
