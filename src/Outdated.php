@@ -8,17 +8,17 @@ use Pollen\Outdated\Adapters\WpOutdatedAdapter;
 use Pollen\Outdated\Partial\OutdatedPartial;
 use Pollen\Support\Concerns\BootableTrait;
 use Pollen\Support\Concerns\ConfigBagAwareTrait;
+use Pollen\Support\Concerns\ResourcesAwareTrait;
 use Pollen\Support\Exception\ManagerRuntimeException;
-use Pollen\Support\Filesystem;
 use Pollen\Support\Proxy\ContainerProxy;
 use Pollen\Support\Proxy\PartialProxy;
-use RuntimeException;
 use Psr\Container\ContainerInterface as Container;
 
 class Outdated implements OutdatedInterface
 {
     use BootableTrait;
     use ConfigBagAwareTrait;
+    use ResourcesAwareTrait;
     use ContainerProxy;
     use PartialProxy;
 
@@ -41,12 +41,6 @@ class Outdated implements OutdatedInterface
     private $defaultProviders = [];
 
     /**
-     * Chemin vers le répertoire des ressources.
-     * @var string|null
-     */
-    protected $resourcesBaseDir;
-
-    /**
      * @param array $config
      * @param Container|null $container
      *
@@ -59,6 +53,8 @@ class Outdated implements OutdatedInterface
         if ($container !== null) {
             $this->setContainer($container);
         }
+
+        $this->setResourcesBaseDir(dirname(__DIR__) . '/resources');
 
         if ($this->config('boot_enabled', true)) {
             $this->boot();
@@ -151,37 +147,6 @@ class Outdated implements OutdatedInterface
 
         return "<script type=\"text/javascript\">/* <![CDATA[ */{$concatJs}/* ]]> */</script>";
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function resources(?string $path = null): string
-    {
-        if ($this->resourcesBaseDir === null) {
-            $this->resourcesBaseDir = Filesystem::normalizePath(
-                realpath(
-                    dirname(__DIR__) . '/resources/'
-                )
-            );
-
-            if (!file_exists($this->resourcesBaseDir)) {
-                throw new RuntimeException('Outdated ressources directory unreachable');
-            }
-        }
-
-        return is_null($path) ? $this->resourcesBaseDir : $this->resourcesBaseDir . Filesystem::normalizePath($path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setResourcesBaseDir(string $resourceBaseDir): OutdatedInterface
-    {
-        $this->resourcesBaseDir = Filesystem::normalizePath($resourceBaseDir);
-
-        return $this;
-    }
-
 
     /**
      * @inheritDoc
