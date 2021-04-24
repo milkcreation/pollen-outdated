@@ -6,12 +6,14 @@ namespace Pollen\Outdated;
 
 use Pollen\Support\Concerns\BootableTraitInterface;
 use Pollen\Support\Concerns\ConfigBagAwareTraitInterface;
+use Pollen\Support\Concerns\ResourcesAwareTraitInterface;
 use Pollen\Support\Proxy\ContainerProxyInterface;
 use Pollen\Support\Proxy\PartialProxyInterface;
 
 interface OutdatedInterface extends
     BootableTraitInterface,
     ConfigBagAwareTraitInterface,
+    ResourcesAwareTraitInterface,
     ContainerProxyInterface,
     PartialProxyInterface
 {
@@ -49,24 +51,6 @@ interface OutdatedInterface extends
      * @return string
      */
     public function getScripts(): string;
-
-    /**
-     * Chemin absolu vers une ressource (fichier|répertoire).
-     *
-     * @param string|null $path Chemin relatif vers la ressource.
-     *
-     * @return string
-     */
-    public function resources(?string $path = null): string;
-
-    /**
-     * Définition du chemin absolu vers le répertoire des ressources.
-     *
-     * @param string $resourceBaseDir
-     *
-     * @return static
-     */
-    public function setResourcesBaseDir(string $resourceBaseDir): OutdatedInterface;
 
     /**
      * Définition de l'adapteur associé.
