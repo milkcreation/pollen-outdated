@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pollen\Outdated;
 
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 trait OutdatedProxy
@@ -26,7 +26,7 @@ trait OutdatedProxy
             try {
                 $this->outdated = Outdated::getInstance();
             } catch (RuntimeException $e) {
-                $this->outdated = StaticProxy::getProxyInstance(
+                $this->outdated = ProxyResolver::getInstance(
                     OutdatedInterface::class,
                     Outdated::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null
