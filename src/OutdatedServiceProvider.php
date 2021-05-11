@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Pollen\Outdated;
 
-use Pollen\Container\BaseServiceProvider;
+use Pollen\Container\BootableServiceProvider;
 use Pollen\Partial\PartialManagerInterface;
 use Pollen\Outdated\Adapters\WpOutdatedAdapter;
 use Pollen\Outdated\Partial\OutdatedPartial;
 
-
-class OutdatedServiceProvider extends BaseServiceProvider
+class OutdatedServiceProvider extends BootableServiceProvider
 {
     /**
      * @var string[]
